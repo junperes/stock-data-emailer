@@ -1,39 +1,50 @@
-# Sobre
+# About
 
-Bot que a partir de uma carteira de ações listada no Excel utiliza a biblioteca pandas_datareader para extrair dados dos último n dias, sendo n o valor de entrada da função. A partir desses dados calcula o valor de hoje e o valor mínimo, médio e máximo do fechamento ajustado dos n dias.
+This repository contains a bot designed to extract data from a stock portfolio listed in Excel using the `pandas_datareader` library. It fetches data from the last n days, where n is the input value of the function. From this data, it calculates today's value and the minimum, average, and maximum values of the adjusted closing prices for the last n days.
 
-Também extrai as cotações do dólar, euro e criptomoedas usando uma API.
+Additionally, the bot extracts quotes for the dollar, euro, and cryptocurrencies using an API.
 
-Por fim uma função envia todas essas informações por email.
+Finally, it includes a function to send all this information via email.
 
-## Instalação:
+## Installation:
 
-Dentro da pasta do projeto, inicie um ambiente virtual:
+To set up the project, follow these steps:
 
-Lunix or Mac
-```
-python3 -m venv .env
-source env/bin/activate
-```
-Windows
-```
-py -m venv .env
-.\env\Scripts\activate
-```
+1. Initialize a virtual environment within the project folder:
 
-### Dependências:
-```
-pip install -r requirements.txt
-```
+    Linux or Mac:
+    ```bash
+    python3 -m venv .env
+    source env/bin/activate
+    ```
 
-## Configurações:
+    Windows:
+    ```bash
+    py -m venv .env
+    .\env\Scripts\activate
+    ```
 
-O cotacoes.py é um programa independente, possui duas funções: 
-- carteira(n_dias) que recebe como parâmetro os dias retroativos, e tem por padrão a data final como hoje. Para cada ação da carteira a função retorna o ajuste calculado de hoje, o valor mínimo, médio e máximo dos n dias.
-- moeda() não recebe nenhum parâmetro e retorna o valor das cotações do dólar, euro e criptomoeda para o instante que o programa é executado.
+2. Install dependencies:
 
-O cotacoesHTML.py é semelhante ao cotacoes.py porém possui ajustes de HTML para formatar o envio do email.
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-O robotmail.py tem como função o send_mail(message1, message2) que recebe dois parâmetros, seriam as funções carteira e moeda. E envia os resultados para o email. 
+## Configuration:
 
-Para que o email seja enviado precisa ser alterado no código os campos de "sender_email", "receiver_email" e "password". O "sender_email" precisa ter nas configurações de segurança do Google uma senha criada para app, caso contrário o Google impede o envio do email.
+This repository contains several Python scripts:
+
+- `cotacoes.py`: This script is an independent program with two functions:
+    - `carteira(n_days)`: This function takes the number of retroactive days as a parameter and defaults to today's date as the end date. For each stock in the portfolio, the function returns today's calculated adjustment, as well as the minimum, average, and maximum values for the last n days.
+    - `moeda()`: This function takes no parameters and returns the values of quotes for the dollar, euro, and cryptocurrency at the moment the program is executed.
+
+- `cotacoesHTML.py`: Similar to `cotacoes.py`, but with HTML adjustments to format the email sending.
+
+- `robotmail.py`: This script contains the `send_mail(message1, message2)` function, which takes two parameters representing the `carteira` and `moeda` functions. It sends the results to the specified email address.
+
+Before using the email functionality, ensure you modify the following fields in the code:
+- `sender_email`: Your email address.
+- `receiver_email`: The recipient's email address.
+- `password`: Your email password. If using Gmail, you may need to generate an app password.
+
+Failure to provide accurate credentials, especially for Gmail accounts, may result in email sending failures due to Google's security settings.
